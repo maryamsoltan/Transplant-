@@ -1,0 +1,512 @@
+A<- A[, -which(names(A) == "PROC_INV_DESC_non.op.resp.measurement")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_INJ.GAMMA.GLOBULIN")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_arthroscopy.hip")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_Replace.nephrostomy.tube")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_RELEASE.OF.URETHRAL.STRICTURE")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_transplant.from.cadaver")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_LAPAROSCOPIC.LYSIS.ADHESIONS")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_Operation.lens..NOC")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_EXC.LESION.SCROTUM")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_Rad.neck.dissec.bilat")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_Operations.on.urethra..other")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_Control.of.epistaxis..other")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_MANUAL.REM.RETAINED.PLACENTA")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_ARTERIOG.FEMORAL.LOW.EXT.ART")]
+A<- A[, -which(names(A) == "PROC_INV_DESC_SALPINGOTOMY")]
+dim(A)
+A[is.na(A)]<-0
+dim(A)
+response_corr<-A
+response_corr = cor(A)
+findCorrelation(response_corr, cutoff = .05, verbose = TRUE, names = TRUE)
+response_corr<- as.data.frame(response_corr)
+response_corr[is.na(response_corr)]<-0
+findCorrelation(response_corr, cutoff = .05, verbose = TRUE, names = TRUE)
+response_corr
+response_corr<-as.matrix(response_corr)
+findCorrelation(response_corr, cutoff = .05, verbose = TRUE, names = TRUE)
+findCorrelation(response_corr, cutoff = .07, verbose = TRUE, names = TRUE)
+findCorrelation(response_corr, cutoff = .08, verbose = TRUE, names = TRUE)
+findCorrelation(response_corr, cutoff = .06, verbose = TRUE, names = TRUE)
+which( colnames(df)=="ALLEG_DESC_DELAY IN SURGERY - 0311")
+which( colnames(df)=="ALLEG_SUBCATG_DESC_CODESEXUAL MISCONDUCT - 1210")
+#data cleaning
+df<- filter(df, df$FULL_CODING_DATE !="null")
+df<- filter(df, df$CURRENT_CODING_STATUS !="Uncodable")
+dim(df)
+which( colnames(df)=="ALLEG_DESC_DELAY IN SURGERY - 0311")
+which( colnames(df)=="ALLEG_SUBCATG_DESC_CODESEXUAL MISCONDUCT - 1210")
+which( colnames(df)=="ALLEG_DESC_DELAY.IN.SURGERY...0311")
+which( colnames(df)=="ALLEG_SUBCATG_DESC_CODESEXUAL.MISCONDUCT...1210")
+alleg_corr<-df[,1156:1298]
+alleg_corr = cor(alleg_corr)
+findCorrelation(alleg_corr, cutoff = .5, verbose = TRUE, names = TRUE)
+alleg_corr[is.na(alleg_corr)]<-0
+findCorrelation(alleg_corr, cutoff = .5, verbose = TRUE, names = TRUE)
+??findCorrelation
+res.pca <- prcomp(df[,1156:1298], scale = TRUE)
+fviz_eig(res.pca, ncp = 25)
+res.pca <- prcomp(df[,1156:1298], scale = FALSE)
+fviz_eig(res.pca, ncp = 25)
+res.ind <- get_pca_ind(res.pca)
+res.var <- get_pca_var(res.pca)
+res.ind$coord
+??findCorrelation
+findCorrelation(alleg_corr, cutoff = .5, verbose = TRUE, names = TRUE)
+res.var$contrib
+res.pca$sdev
+head(df$PRI_CLAIMANT_TYPE_DESC)
+head(df$INITIAL_DIAGNOSIS_DESC)
+head(df$PRI_CLAIMANT_NAME)
+head(df$PRI_CLAIMANT_TYPE_DESC)
+df$INJURY_SEVERITY_DESC
+#reading the data
+df <- read.csv("C:/Users/mgharibdousti/Desktop/CRICO/MASSIVE_TABLE_3rd_Feb..csv")
+dim(df)
+#data cleaning
+df<- filter(df, df$FULL_CODING_DATE !="null")
+df<- filter(df, df$CURRENT_CODING_STATUS !="Uncodable")
+dim(df)
+df$CURRENT_CODING_STATUS
+df$FULL_CODING_DATE
+class(df)
+df<- as.data.frame(df)
+class(df)
+df<- filter(df, df$FULL_CODING_DATE !="null")
+df<- filter(df, df$CURRENT_CODING_STATUS !="Uncodable")
+dim(df)
+df<- filter(df, df$CURRENT_CODING_STATUS !="Uncodable")
+df<- as.data.frame(df)
+View(df)
+df <- read.csv("C:/Users/mgharibdousti/Desktop/CRICO/MASSIVE_TABLE_3rd_Feb..csv", header = TRUE)
+df<- as.data.frame(df)
+#data cleaning
+df<- filter(df, df$FULL_CODING_DATE !="null")
+df<- filter(df, df$curre !="Uncodable")
+dim(df)
+View(df)
+df <- read.csv("C:/Users/mgharibdousti/Desktop/CRICO/MASSIVE_TABLE.csv")
+View(df)
+df<- filter(df, df$FULL_CODING_DATE !="null")
+df<- filter(df, df$curre !="Uncodable")
+dim(df)
+df<- as.data.frame(df)
+df<- filter(df, df$FULL_CODING_DATE !="null")
+df<- filter(df, df$curre !="Uncodable")
+View(df)
+df <- read.csv("C:/Users/mgharibdousti/Desktop/CRICO/MASSIVE_TABLE.csv", header = TRUE)
+df<- filter(df, df$FULL_CODING_DATE !="null")
+class(df)
+df<- as.data.frame(df)
+View(df)
+#loading packages
+library(lapply)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(microbenchmark)
+library(tidyverse)
+library(plyr)
+library(janitor)
+install.packages("rlang")
+install.packages("rlang")
+df <- read.csv("C:/Users/mgharibdousti/Desktop/CRICO/MASSIVE_TABLE.csv", header = TRUE)
+#df<- as.data.frame(df)
+#data
+df<- filter(df, df$FULL_CODING_DATE !="null")
+df<- filter(df, df$CURRENT_CODING_STATUS !="Uncodable")
+dim(df)
+colnames(df)
+df$INJURY_BODY_HEMATOLOGIC
+df$INJURY_SEVERITY_CATG
+df$INJURY_SEVERITY_DESC
+table(df$INJURY_SEVERITY_DESC)
+levels(df$INJURY_SEVERITY_DESC)
+levels(df$INJURY_SEVERITY_CATG)
+which( colnames(df)=="ALLEG_DESC_DELAY.IN.SURGERY...0311")
+which( colnames(df)=="ALLEG_SUBCATG_DESC_CODESEXUAL.MISCONDUCT...1210")
+alleg_corr<-df[,1156:1298]
+alleg_corr = cor(alleg_corr)
+library(caret)
+findCorrelation(alleg_corr, cutoff = .5, verbose = TRUE, names = TRUE)
+alleg_corr[is.na(alleg_corr)]<-0
+findCorrelation(alleg_corr, cutoff = .5, verbose = TRUE, names = TRUE)
+library("factoextra")
+res.pca <- prcomp(df[,1156:1298], scale = FALSE)
+fviz_eig(res.pca, ncp = 25)
+fviz_eig(res.pca, ncp = 15)
+fviz_eig(res.pca, ncp = 10)
+fviz_pca_ind(res.pca, col.ind = "cos2", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), title="ALLEGATION-PCA", repel = TRUE)
+#view(res.pca)
+fviz_pca_var(res.pca,
+col.var = "contrib",
+gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+repel = TRUE)
+view(df[,1156:1298])
+eig.val <- get_eigenvalue(res.pca)
+eig.val
+library(factoextra)
+res.var <- get_pca_var(res.pca)
+res.var$contrib        # Contributions to the PCs
+view(res.var$contrib )
+res.var$cos2
+dim(df[,1156:1298])
+write.csv(res.var$contrib ,"C:/Users/mgharibdousti/Desktop/CRICO/Importants\\File Name.csv", row.names = FALSE)
+# Results for CAS
+findCorrelation(alleg_corr, cutoff = .5, verbose = TRUE, names = TRUE)
+which( colnames(df)=="ALLEG_DESC_Administration...Wrong.dose...0933")
+which( colnames(df)=="ALLEG_DESC_WRONG.UNNECESSARY.TREATMENT.PROCEDURE...0113")
+1236-1185
+ALLEG_DESC<- df[, 1185:1236]
+res.pca <- prcomp(ALLEG_DESC, scale = FALSE)
+fviz_eig(res.pca, ncp = 25)
+res.pca <- prcomp(ALLEG_DESC, scale = FALSE)
+fviz_eig(res.pca, ncp = 25)
+fviz_eig(res.pca, ncp = 15)
+fviz_eig(res.pca, ncp = 15, title="ALLEG-DESC")
+fviz_eig(res.pca, ncp = 15, title="ALLEG-DESC")
+fviz_eig(res.pca, ncp = 15, title="ALLEG-DESC")
+png("Output.png")
+png("Output.png")
+res.var
+res.pca
+head(res.pca)
+res.pca$sdev
+get_pca_var(res.pca)
+res.var <- get_pca_var(res.pca)
+res.var$cor
+fviz_eig
+fviz_eig(res.pca, ncp = 10)
+summary(res.pca)
+fviz_eig(res.pca, ncp = 10)[1]
+summary(res.pca)[1]
+summary(res.pca)[2]
+summary(res.pca)[3]
+summary(res.pca)[4]
+summary(res.pca)[5]
+summary(res.pca)[6]
+summary(res.pca)[7]
+res.pca$sdev
+library("factoextra")
+res.pca <- prcomp(df[,1156:1298], scale = FALSE)
+res.pca
+res.pca$sdev^2
+res.pca$sdev^2[1:10]
+res.pca$sdev^2[1:2]
+res.pca <- prcomp(df[,1156:1298], scale = FALSE)
+table(fviz_eig(res.pca, ncp = 10))
+table(fviz_eig(res.pca)
+table(fviz_eig(res.pca))
+table(fviz_eig(res.pca))
+prcomp
+??prcomp
+res.pca$x
+res.pca$sdv
+res.pca$sdev
+fviz_eig(res.pca, ncp = 10)
+fviz_eig(res.pca, ncp = 30)
+fviz_eig(res.pca, ncp = 30)
+fviz_eig(res.pca, ncp = 30)
+fviz_eig(res.pca, ncp = 30)
+fviz_eig(res.pca, ncp = 30)
+plot(a)
+plot(2)
+fviz_eig(res.pca, ncp = 30)
+res.ind <- get_pca_ind(res.pca)
+res.ind$coord
+res.ind$contrib
+res.ind$cos2
+eig.val
+res.pca <- prcomp(ALLEG_DESC, scale = FALSE)
+fviz_eig(res.pca, ncp = 15, title="ALLEG-DESC")
+fviz_eig
+res.pca <- prcomp(ALLEG_DESC, scale = FALSE)
+fviz_eig(res.pca, ncp = 15, title="ALLEG-DESC")
+library(factoextra)
+eig.val <- get_eigenvalue(res.pca)
+eig.val
+res.var <- get_pca_var(res.pca)
+res.var$contrib        # Contributions to the PCs
+view(res.var$contrib)
+library(caret)
+alleg_corr[is.na(alleg_corr)]<-0
+findCorrelation(alleg_corr, cutoff = .5, verbose = TRUE, names = TRUE)
+library("factoextra")
+res.pca <- prcomp(df[,1156:1298], scale = FALSE)
+fviz_eig(res.pca, ncp = 30)
+eig.val <- get_eigenvalue(res.pca)
+eig.val
+res.var$contrib
+view(res.var$contrib )
+res.pca <- prcomp(ALLEG_DESC, scale = FALSE)
+fviz_eig(res.pca, ncp = 15, title="ALLEG-DESC")
+library(factoextra)
+eig.val <- get_eigenvalue(res.pca)
+eig.val
+res.var$contrib
+view(res.var$contrib )
+eig.val <- get_eigenvalue(res.pca)
+eig.val
+library("factoextra")
+res.pca <- prcomp(df[,1156:1298], scale = FALSE)
+fviz_eig(res.pca, ncp = 30)
+library(factoextra)
+# Eigenvalues
+eig.val <- get_eigenvalue(res.pca)
+eig.val
+res.var$contrib
+view(res.var$contrib  )
+library("factoextra")
+res.pca <- prcomp(df[,1156:1298], scale = FALSE)
+res.var$contrib
+write.csv(res.var$contrib ,"C:/Users/mgharibdousti/Desktop/CRICO/Importants\\File Name.csv", row.names = FALSE)
+# Results for CASES
+view(res.var$contrib)
+1156-1298
+res.pca <- prcomp(df[,1156:1298], scale = FALSE)
+fviz_eig(res.pca, ncp = 30)
+res.var$contrib
+dim(res.var$contrib )
+res.var <- get_pca_var(res.pca)
+res.var$contrib
+write.csv(res.var$contrib ,"C:/Users/mgharibdousti/Desktop/CRICO/Importants\\File Name.csv", row.names = FALSE)
+# Results for CASES
+write.csv(res.var$contrib ,"C:/Users/mgharibdousti/Desktop/CRICO/Importants\\File Name.csv", row.names = FALSE)
+# Results for CASES
+write.csv(res.var$contrib ,"C:/Users/mgharibdousti/Desktop/CRICO/Importants\\File Name.csv", row.names = TRUE)
+write.csv(res.var$contrib ,"C:/Users/mgharibdousti/Desktop/CRICO/Importants\\File Name.csv", row.names = TRUE)
+library(readxl)
+library(tidyverse)
+SecondScenarioSensitivityAnalysis <- read_excel("C:/Users/mgharibdousti/Desktop/Dissertation/SecondScenarioSensitivityAnalysis.xlsx")
+SecondScenarioSensitivityAnalysis <- data.frame(SecondScenarioSensitivityAnalysis)
+SecondScenarioSensitivityAnalysis<- dfplot3
+dfplot3<- SecondScenarioSensitivityAnalysis
+library(readxl)
+library(tidyverse)
+SecondScenarioSensitivityAnalysis <- read_excel("C:/Users/mgharibdousti/Desktop/Dissertation/SecondScenarioSensitivityAnalysis.xlsx")
+SecondScenarioSensitivityAnalysis <- data.frame(SecondScenarioSensitivityAnalysis)
+dfplot3<- SecondScenarioSensitivityAnalysis
+dfplot3 %>%
+group_by(Number.of.paired.matches) %>%
+get_summary_stats(Utility, type = "mean_sd")
+#dfplot1$group<- as.numeric(dfplot1$group)
+library(dplyr)
+dfplot3 %>%
+group_by(Number.of.paired.matches) %>%
+get_summary_stats(Number.of.paired.matches, type = "mean_sd")
+library(dplyr)
+dfplot3 %>%
+group_by(Number.of.paired.matches) %>%
+get_summary_stats(Number.of.paired.matches, type = "mean_sd")
+library(dplyr)
+library(readxl)
+library(tidyverse)
+dfplot3 %>%
+group_by(Number.of.paired.matches) %>%
+get_summary_stats(Number.of.paired.matches, type = "mean_sd")
+??get_summary_stats
+library(ggpubr)
+dfplot3 %>%
+group_by(Number.of.paired.matches) %>%
+get_summary_stats(Number.of.paired.matches, type = "mean_sd")
+dfplot3$Number.of.matched.pairs
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(Number.of.paired.matches, type = "mean_sd")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "Number.of.paired.matches",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Number of matched paires", xlab = "Case Studies")
+dfplot3$Number.of.matched.pairs
+library(readxl)
+library(tidyverse)
+SecondScenarioSensitivityAnalysis <- read_excel("C:/Users/mgharibdousti/Desktop/Dissertation/SecondScenarioSensitivityAnalysis.xlsx")
+SecondScenarioSensitivityAnalysis <- data.frame(SecondScenarioSensitivityAnalysis)
+dfplot3<- SecondScenarioSensitivityAnalysis
+library(dplyr)
+library(readxl)
+library(tidyverse)
+library(ggpubr)
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(Number.of.paired.matches, type = "mean_sd")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "Number.of.paired.matches",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Number of matched paires", xlab = "Case Studies")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "Number.of.paired.matches",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Number of matched paires", xlab = "Case Studies")
+library("ggpubr")
+ggline(dfplot3, x = "group", y = "Number.of.paired.matches",
+add = c("mean_se", "jitter"),
+order = c("1", "2", "3", "4", "5"),
+ylab = "Number of matched paires", xlab = "Case Studies")
+kruskal.test(Number.of.paired.matches~ group, data = dfplot3)
+pairwise.wilcox.test(dfplot3$Number.of.paired.matches, dfplot3$group,
+p.adjust.method = "BH")
+library(dplyr)
+library(readxl)
+library(tidyverse)
+library(ggpubr)
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(Objective.value, type = "mean_sd")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "Objective.value",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Objective value", xlab = "Case Studies")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "Objective.value",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Objective value", xlab = "Case Studies")
+library("ggpubr")
+ggline(dfplot3, x = "group", y = "Objective.value",
+add = c("mean_se", "jitter"),
+order = c("1", "2", "3", "4", "5"),
+ylab = "Objective value", xlab = "Case Studies")
+kruskal.test(Objective.value ~ group, data = dfplot3)
+pairwise.wilcox.test(dfplot3$Objective.value, dfplot3$group,
+p.adjust.method = "BH")
+library(readxl)
+library(tidyverse)
+ThirdScenarioSensitivitAnalysisLAMBDAAAA <- read_excel("C:/Users/mgharibdousti/Desktop/Dissertation/ThirdScenarioSensitivitAnalysisLAMBDAAAA")
+ThirdScenarioSensitivitAnalysisLAMBDAAAA <- data.frame(ThirdScenarioSensitivitAnalysisLAMBDAAAA)
+dfplot3<- ThirdScenarioSensitivitAnalysisLAMBDAAAA
+library(readxl)
+library(tidyverse)
+ThirdScenarioSensitivitAnalysisLAMBDAAAA <- read_excel("C:/Users/mgharibdousti/Desktop/Dissertation/ThirdScenarioSensitivitAnalysisLAMBDAAAA.xlsx")
+ThirdScenarioSensitivitAnalysisLAMBDAAAA <- data.frame(ThirdScenarioSensitivitAnalysisLAMBDAAAA)
+dfplot3<- ThirdScenarioSensitivitAnalysisLAMBDAAAA
+library(readxl)
+library(tidyverse)
+ThirdScenarioSensitivitAnalysisLAMBDAAAA <- read_excel("C:/Users/mgharibdousti/Desktop/Dissertation/ThirdScenarioSensitivitAnalysisLAMBDAAAA.xlsx")
+ThirdScenarioSensitivitAnalysisLAMBDAAAA <- data.frame(ThirdScenarioSensitivitAnalysisLAMBDAAAA)
+dfplot3<- ThirdScenarioSensitivitAnalysisLAMBDAAAA
+library(dplyr)
+library(readxl)
+library(tidyverse)
+library(ggpubr)
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(Objective.value, type = "mean_sd")
+dfplot3<- ThirdScenarioSensitivitAnalysisLAMBDAAAA
+dfplot3
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(Number.of.paired.matches, type = "mean_sd")
+setwd("C:/Users/mgharibdousti/Desktop/Dissertation")
+ThirdScenarioSensitivitAnalysisLAMBDAAAA
+library(readxl)
+library(tidyverse)
+ThirdScenarioSensitivitAnalysisLAMBDAAAA <- read_excel("C:/Users/mgharibdousti/Desktop/Dissertation/ThirdScenarioSensitivitAnalysisLAMBDAAAA.xlsx")
+ThirdScenarioSensitivitAnalysisLAMBDAAAA <- data.frame(ThirdScenarioSensitivitAnalysisLAMBDAAAA)
+dfplot3<- ThirdScenarioSensitivitAnalysisLAMBDAAAA
+library(dplyr)
+library(readxl)
+library(tidyverse)
+library(ggpubr)
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(Number.of.paired.matches, type = "mean_sd")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "Number.of.paired.matches",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Number of paired matches", xlab = "Case Studies")
+library("ggpubr")
+ggline(dfplot3, x = "group", y = "Number.of.paired.matches",
+add = c("mean_se", "jitter"),
+order = c("1", "2", "3", "4", "5"),
+ylab = "Number of paired matches", xlab = "Case Studies")
+kruskal.test(Number.of.paired.matches ~ group, data = dfplot3)
+pairwise.wilcox.test(dfplot3$Number.of.paired.matches, dfplot3$group,
+p.adjust.method = "BH")
+library(dplyr)
+library(readxl)
+library(tidyverse)
+library(ggpubr)
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(Objective.value, type = "mean_sd")
+library(dplyr)
+library(readxl)
+library(tidyverse)
+library(ggpubr)
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(Objective value, type = "mean_sd")
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(dfplot3$TransplantBenefit, type = "mean_sd")
+#dfplot3$Number.of.paired.matches
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "TransplantBenefit",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Transplant benefit", xlab = "Case Studies")
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(dfplot3$TransplantBenefit, type = "mean_sd")
+library(dplyr)
+library(readxl)
+library(tidyverse)
+library(ggpubr)
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(TransplantBenefit, type = "mean_sd")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "TransplantBenefit",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Transplant benefit", xlab = "Case Studies")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "TransplantBenefit",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Transplant benefit", xlab = "Case Studies")
+library("ggpubr")
+ggline(dfplot3, x = "group", y = "TransplantBenefit",
+add = c("mean_se", "jitter"),
+order = c("1", "2", "3", "4", "5"),
+ylab = "Transplant benefit", xlab = "Case Studies")
+kruskal.test(TransplantBenefit ~ group, data = dfplot3)
+pairwise.wilcox.test(dfplot3$TransplantBenefit, dfplot3$group,
+p.adjust.method = "BH")
+library(readxl)
+library(tidyverse)
+ThirdScenarioSA_P <- read_excel("C:/Users/mgharibdousti/Desktop/Dissertation/ThirdScenarioSA_P.xlsx")
+ThirdScenarioSA_P <- data.frame(ThirdScenarioSA_P)
+dfplot3<- ThirdScenarioSA_P
+library(dplyr)
+library(readxl)
+library(tidyverse)
+library(ggpubr)
+dfplot3 %>%
+group_by(group) %>%
+get_summary_stats(Obj.Value, type = "mean_sd")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "Obj.Value",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Objective Value", xlab = "Case Studies")
+library("ggpubr")
+ggboxplot(dfplot3, x = "group", y = "Obj.Value",
+color = "group",
+order = c("1", "2", "3", "4", "5"),
+ylab = "Objective Value", xlab = "Case Studies")
+library("ggpubr")
+ggline(dfplot3, x = "group", y = "Obj.Value",
+add = c("mean_se", "jitter"),
+order = c("1", "2", "3", "4", "5"),
+ylab = "Objective Value", xlab = "Case Studies")
+kruskal.test(Obj.Value ~ group, data = dfplot3)
+pairwise.wilcox.test(dfplot3$Obj.Value, dfplot3$group,
+p.adjust.method = "BH")
+View(eig.val)
